@@ -1,0 +1,1 @@
+define(["backbonestore","underscore.string"],function(e,t){var n={};return n.SendEmailToFriend=e.Model.extend({name:"model-sendemailtofriend",initialize:function(e){this.settings=e},url:function(){var e="/api/sendemailtofriend/?",t=Array();return _.each(this.settings,function(e,n){t.push(n+"="+e)}),e+t.join("&")}}),n})

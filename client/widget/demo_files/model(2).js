@@ -1,0 +1,1 @@
+define(["backbonestore"],function(e){var t={};return t.ImageGallery=e.Model.extend({name:"model-imagegallery",initialize:function(e){this.settings=e},url:function(){return"/resources/js/app/ui-modules/imagegallery/fixtures/carousel.json"}}),t})

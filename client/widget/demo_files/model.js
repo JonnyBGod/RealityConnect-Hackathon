@@ -1,0 +1,1 @@
+define(["backbonestore","underscore.string"],function(e,t){var n={};return n.LeadCapture=e.Model.extend({name:"model-leadcapture",initialize:function(e){this.settings=e},url:function(){var e="/api/leadcapture/?",t=Array();return _.each(this.settings,function(e,n){t.push(n+"="+e)}),e+t.join("&")}}),n})
