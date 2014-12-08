@@ -55,3 +55,9 @@ Here provide couple screenshots of your project.
 	- Floobits
 	- Koding
 	- Sublime Text 3
+
+
+## Start server
+
+cd ~/ori
+NODE_ENV=development node server/serve.js 
