@@ -17,7 +17,6 @@ results
 npm-debug.log
 node_modules
 dist
-.tmp
 
 ### OSX ###
 .DS_Store
