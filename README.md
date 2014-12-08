@@ -6,8 +6,6 @@ Our project for the Koding #hackathon
 
 ## Description
 
-[![Koding Hackathon](/images/badge.png?raw=true "Koding Hackathon")](https://koding.com/Hackathon)
-
 We choose to create a chat as a service for platforms. The idea is for platforms where two diferent user (sellers and buyers) to better comunicate and negotiate through a chat application.
 
 It is composed of:
@@ -34,7 +32,26 @@ We want to try to make it better for the end users.
 Here provide couple screenshots of your project.
 
 ![ORi](http://cl.ly/image/0M0P14363N1I/download/Image%20from%20davidpires.jpg "ORi")
+![ORi](http://cl.ly/image/0j2X0X3C3v23/download/Image%202014-12-08%20at%202.40.30%20am.png "ORi Demo Widget")
+![ORi](http://cl.ly/image/3T2D1o1V1Y2Q/download/Image%202014-12-08%20at%207.51.29%20am.png "ORi Chat")
 
 ## APIs used
 
-	- 
+	- Facebook (not finished)
+	- Google + (not finished)
+	- Twitter (not finished)
+	- Gravatar
+
+## Services used
+ 
+ 	- MongoLabs
+ 	- RedisLabs
+ 	- Seo4ajax
+ 	- New Relic
+ 	- Google Analytics / Webmaster tools
+
+## Development
+
+	- Floobits
+	- Koding
+	- Sublime Text 3
