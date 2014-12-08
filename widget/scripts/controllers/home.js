@@ -56,7 +56,7 @@ angular.module('ori')
             iframe.sendHostMessage("resize", {
               height: $("body").height()
             });
-          }, 100);
+          }, 500);
         },
         function (err) {
           AppAuth.currentUser.chatRooms = [];
@@ -65,7 +65,7 @@ angular.module('ori')
             iframe.sendHostMessage("resize", {
               height: $("body").height()
             });
-          }, 100);
+          }, 500);
         }
       );
     }
