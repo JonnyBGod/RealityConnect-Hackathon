@@ -27,7 +27,7 @@ app.use(loopback.token({model: app.models.AccessToken}));
 app.use(loopback.json());
 app.use(loopback.urlencoded({ extended: false }));
 // -- Add your pre-processing middleware here --
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'dev') {
   app.use(require('connect-livereload')({
     port: 35729
   }));
