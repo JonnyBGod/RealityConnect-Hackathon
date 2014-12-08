@@ -37,7 +37,6 @@ Icon
 *.sublime-workspace
 
 ### Linux ###
-.*
 !.gitignore
 !.git*
 !.travis.yml
