@@ -111,7 +111,7 @@ angular.module('services', ['lbServices'])
       connect: function (token) {
         var self = this;
         if (!self.socket) {
-          self.socket = io('/websocket/', {
+          self.socket = io('/', {
             'query': 'access_token=' + LoopBackAuth.accessTokenId
           });
 
