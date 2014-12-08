@@ -4,41 +4,37 @@ RealityConnect-Hackathon
 Our project for the Koding #hackathon
 
 
-Installation
-============
-	- Download and extract
+## Description
 
-	- npm install
+[![Koding Hackathon](/images/badge.png?raw=true "Koding Hackathon")](https://koding.com/Hackathon)
 
-	- bower install
+We choose to create a chat as a service for platforms. The idea is for platforms where two diferent user (sellers and buyers) to better comunicate and negotiate through a chat application.
 
+It is composed of:
 
-Config
-======
+- a website http://ujkk8b52147e.jonnybgod.koding.io/
+	- landing page
+	- account creation
+	- website/app management
 
-	- Set PROJECT-NAME in ./package.json and ./bower.js
+- a widget http://ujkk8b52147e.jonnybgod.koding.io/widget
+	- demo: http://ujkk8b52147e.jonnybgod.koding.io/demo.html
+	- to be embed on platforms' pages
+	- provides a chat app for "buyers" to initiate a conversation with "sellers"
 
-	- Set PROJECT-NAME and LICENSE-KEY in ./newrelic.js
+- a chat app http://ujkk8b52147e.jonnybgod.koding.io/chat
+	- provides a centralized point for users to comunicate and manage their contacts
 
-	- Set MONGODB-SERVER in ./server/datasources.json
+The idea came from the fact that these kind of platforms usualy only provide email through a form for users to comunicate. This is slow, not as personal as a chat and leads to more confusion in conversations.
 
-	- Set API_URL in ./Gruntfile.js
+We want to try to make it better for the end users.
 
-	- Set api keys in ./server/providers.json
+## Screenshots
 
+Here provide couple screenshots of your project.
 
-Extras
-======
+![ORi](http://cl.ly/image/0M0P14363N1I/download/Image%20from%20davidpires.jpg "ORi")
 
-You can use ./nginx.conf as a starting point for nginx configuration.
-Edit all APP_ROOT_FOLDER, SEO4AJAX_API_KEY (some might be repeated, make sure you edit all of them)
-Copy ./nginx.conf to /etc/nginx/sites-available/
+## APIs used
 
-Alternatively, if you want ssl configuration do the above steps with nging_ssl.conf and place your certificate files in:
- 
-	- /opt/nginx/ssl_certs/server.pem
-	- /opt/nginx/ssl_certs/server.key
- 	- /opt/nginx/ssl_certs/dhparam.pem
- 	- /opt/nginx/ssl_certs/godaddy_ssl_trusted_certificate.pem
-
-(this configuration will grant you A+ grade security)
+	- 
