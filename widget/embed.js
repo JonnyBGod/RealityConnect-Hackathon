@@ -870,7 +870,7 @@ ORi.define(function (a, b) {
     var j = i.extend({
         name: null,
         frame: null,
-        origin: e.ensureHttpBasedProtocol("http://localhost:3000", g),
+        origin: e.ensureHttpBasedProtocol("http://ujkk8b52147e.jonnybgod.koding.io", g),
         state: null,
         getUrl: function () {
             return e.get(this.name)
@@ -1170,7 +1170,7 @@ ORi.define(function (a, b) {
     "use strict";
     var b = a.document,
         c = ".ori-loader{animation:ori-embed-spinner .7s infinite linear;-webkit-animation:ori-embed-spinner .7s infinite linear}@keyframes ori-embed-spinner{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}@-webkit-keyframes ori-embed-spinner{0%{-webkit-transform:rotate(0deg)}100%{-webkit-transform:rotate(360deg)}}",
-        d = "//localhost:3000/widget/images/loader.png",
+        d = "//ujkk8b52147e.jonnybgod.koding.io/widget/images/loader.png",
         e = ORi.next.host,
         f = e.utils,
         g = e.app.ThreadBoundApp,

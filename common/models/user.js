@@ -97,7 +97,7 @@ module.exports = function(User) {
                             text: 'Please verify your email address!',
                             template: __dirname + '/../templates/emails/verify.html.ejs',
                             redirect: 'http://localhost:9000/',
-                            host: 'localhost:3000/api'
+                            host: 'ujkk8b52147e.jonnybgod.koding.io/api'
                           };
                          
                           user.verify(options, function () {

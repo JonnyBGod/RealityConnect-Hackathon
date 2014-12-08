@@ -16,7 +16,7 @@ describe('url', function(){
 
   it('works with no protocol', function(){
     loc.protocol = 'http:';
-    var parsed = url('localhost:3000', loc);
+    var parsed = url('ujkk8b52147e.jonnybgod.koding.io', loc);
     expect(parsed.host).to.be('localhost');
     expect(parsed.port).to.be('3000');
     expect(parsed.protocol).to.be('http');
@@ -24,7 +24,7 @@ describe('url', function(){
 
   it('works with no schema', function(){
     loc.protocol = 'http:';
-    var parsed = url('//localhost:3000', loc);
+    var parsed = url('//ujkk8b52147e.jonnybgod.koding.io', loc);
     expect(parsed.host).to.be('localhost');
     expect(parsed.port).to.be('3000');
     expect(parsed.protocol).to.be('http');
