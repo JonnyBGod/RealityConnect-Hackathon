@@ -1,0 +1,208 @@
+<div class="container">
+  <div class="header clearfix" ng-controller="headerCtrl">
+    <h3 class="text-muted pull-left"><a ng-href="/">ORi</a>&nbsp;&nbsp;</h3>
+
+    <ul class="nav nav-pills navbar-right">
+      <li ng-if="!currentUser.name"><a ng-href="/signin" translate>Log In</a></li>
+      <li ng-if="currentUser.name" class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+          <img data-ng-if="currentUser.photo" data-ng-src="{{currentUser.photo}}">
+          <i data-ng-if="!currentUser.photo" class="fa fa-user fa-lg"></i> <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+          <li><a><span translate>Welcome</span>, <strong>{{currentUser.name}}</strong></a></li>
+          <li class="divider"></li>
+          <li><a href="/chat/" target="_top" translate>Chat app</a></li>
+          <li class="divider"></li>
+          <li><a ng-href="/apps" translate>My Websites</a></li>
+          <li class="divider"></li>
+          <li><a ng-href="/account" translate>Profile Settings</a></li>
+          <li><a ng-click="logout()" translate>Log out</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="Form Account">
+    <br>
+    <div class="container">
+
+        <div class="form_wraper">
+
+            <h2 translate>Profile Settings</h2>
+
+            <form class="form-horizontal" data-ng-submit="submit()" name="putUserSettings">
+
+                <h5 translate>Name</h5>
+
+                <div class="input-group">
+                    <input type="text" class="form-control" data-ng-model="currentUser.name" required>
+                    <span class="input-group-btn">
+                        <button type="submit" class="submit btn btn-primary" translate>Save name</button>
+                    </span>
+                </div>
+                
+
+                <h5 translate>Email</h5>
+
+                <input type="email" class="form-control" data-ng-model="currentUser.email" disabled>
+
+                <br>
+                
+            </form>
+        </div>
+
+        <div class="form_wraper">
+            <h2 translate>Change Password</h2>
+
+            <form data-ng-submit="submit('changepassword')" name="putUserPassword">
+
+                <div class="input-group">
+                    <input type="password" class="form-control" data-ng-model="formPass.newPassword" placeholder="{{'New Password'|translate}}" required>
+                    <span class="input-group-btn">
+                        <button type="submit" class="submit btn btn-primary" data-ng-disabled="isClear() || putUserPassword.$invalid" translate>Save password</button>
+                    </span>
+                </div>
+
+            </form>
+        </div>
+
+        <div class="form_wraper">
+            <h2 translate>Social Networks</h2>
+
+            <form data-ng-submit="submit('changeSocialShare')" name="putUserSocialShare">
+
+                <h6 ng-if="!formSocial.facebook || !formSocial.facebook.token || !formSocial.google || !formSocial.google.token || !formSocial.twitter || !formSocial.twitter.token" translate>Connect your social networks:</h6>
+
+               <div class="log-form">
+                    <div class="social text-center">
+                        <a class="fb_connect" ng-href="/auth/facebook">
+                            <span class="fa-stack fa-2x">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x"></i>
+                            </span>
+                        </a>
+                        <a class="go_connect" ng-href="/auth/google">
+                            <span class="fa-stack fa-2x">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-google fa-stack-1x"></i>
+                            </span>
+                        </a>
+                        <a class="tw_connect" ng-href="/auth/twitter">
+                            <span class="fa-stack fa-2x">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x"></i>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+                
+                <br>
+
+                <div class="row" ng-if="formSocial.facebook && formSocial.facebook.token">
+                    <div class="col-sm-4">
+                        <i class="icon-facebook-alt"></i> Facebook
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="checkbox" data-ng-model="formSocial.facebook.autoShare" ng-change="updateSocialShare()">
+                    </div>
+                    <div class="col-sm-4">
+                        <a class="btn btn-link" ng-click="unlink('facebook')" translate>Unlink</a>
+                    </div>
+                </div>
+
+                <div class="row" ng-if="formSocial.google && formSocial.google.token">
+                    <div class="col-sm-4">
+                        <i class="icon-google-plus-alt"></i> Google
+                    </div>
+                    <div class="col-sm-4">
+                        <!--<input type="checkbox" data-ng-model="formSocial.google.autoShare" ng-change="updateSocialShare()">-->
+                    </div>
+                    <div class="col-sm-4">
+                        <a class="btn btn-link" ng-click="unlink('google')" translate>Unlink</a>
+                    </div>
+                </div>
+
+                <div class="row" ng-if="formSocial.twitter && formSocial.twitter.token">
+                    <div class="col-sm-4">
+                        <i class="icon-twitter-alt"></i> Twitter
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="checkbox" data-ng-model="formSocial.twitter.autoShare" ng-change="updateSocialShare()">
+                    </div>
+                    <div class="col-sm-4">
+                        <a class="btn btn-link" ng-click="unlink('twitter')" translate>Unlink</a>
+                    </div>
+                </div>
+
+                <br>
+
+                <div class="socialAuth">
+                    <a id="fb_connect" ng-if="!formSocial.facebook || !formSocial.facebook.token" data-ng-click="openAuth('facebook');"><i class="icon-facebook-alt icon-large"></i></a>
+                    <a id="go_connect" ng-if="!formSocial.google || !formSocial.google.token" data-ng-click="openAuth('google');"><i class="icon-google-plus-alt icon-large"></i></a>
+                    <a id="tw_connect" ng-if="!formSocial.twitter || !formSocial.twitter.token" data-ng-click="openAuth('twitter');"><i class="icon-twitter-alt icon-large"></i></a>
+                </div>
+
+            </form>
+        </div>
+
+        <div class="form_wraper">
+            <h2>
+                <span translate>Deactivate Account</span>
+                <button class="btn btn-link pull-right" data-ng-click="switchDeactivateAccount()" translate>Deactivate</button>
+            </h2>
+
+            <form data-ng-if="openDeactivateAccount" class="form-horizontal" data-ng-submit="submit('deactivateaccount')" name="putDeactivateAccount">
+
+                <div class="alert alert-warning" translate>Please be aware that if you proceed all you data will be deleted immediately.</div>
+
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" data-ng-model="formDeac.reason.temporary"> <span translate>This is temporary. I'll be back.</span>
+                    </label>
+                </div>
+
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" data-ng-model="formDeac.reason.privacy"> <span translate>I have a privacy concern.</span>
+                    </label>
+                </div>
+
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" data-ng-model="formDeac.reason.notusefull"> <span translate>I don't find useful.</span>
+                    </label>
+                </div>
+
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" data-ng-model="formDeac.reason.dontunderstand"> <span translate>I don't understand how to use.</span>
+                    </label>
+                </div>
+
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" data-ng-model="formDeac.reason.duplicateaccount"> <span translate>I have another account.</span>
+                    </label>
+                </div>
+
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" data-ng-model="formDeac.reason.other"> <span translate>Other.</span>
+                    </label>
+                </div>
+
+                <textarea name="deactivate_message" cols="42" class="form-control" rows="3" maxlength="255" data-ng-model="formDeac.message" placeholder="{{'Leave us some feedback.'|translate}}"></textarea>
+
+                <br>
+
+                <div class="col-md-12 center-block">
+                    <button type="submit" class="submit btn btn-warning center-block" data-ng-disabled="isClear() || putDeactivateAccount.$invalid" translate>Deactivate</button>
+                </div>
+
+                <br>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,57 @@
+<div ng-if="currentChatRoom.appPage" class="appPage clearfix">
+	<img ng-src="{{currentChatRoom.appPage.meta.image.url}}">
+	<h4>{{currentChatRoom.appPage.meta.site_name}}</h4>
+	<a href="{{currentChatRoom.appPage.meta.url}}" target="_blank">{{currentChatRoom.appPage.meta.title}}</a>
+	<img ng-src="{{currentChatRoom.appPage.url.protocol}}//{{currentChatRoom.appPage.url.host}}/favicon.ico">
+</div>
+
+<div ng-class="{apppage: currentChatRoom.appPage}" class="chat" id="chat" when-scrolled-chat="getChatRoomEvents()" ng-dblclick="chatDblClick()">
+	<div ng-show="currentChatRoom.loading" class="loading">
+		<div class="spinner">
+			<div class="double-bounce1"></div>
+			<div class="double-bounce2"></div>
+		</div>
+	</div>
+
+	<div ng-repeat="event in currentChatRoom.events | orderBy:'id' track by event.id" class="line clearfix">
+		<div ng-if="event.type.indexOf('notification') === -1">
+			<div ng-if="event.startSession" class="time" caas-time="{{event.id}}"></div>
+
+	    	<img ng-if="event.sender && event.sender !== currentUser.id" class="pull-left userImage" photo-src>	
+
+			<div ng-if="event.type === 'message'" ng-class="{true:'from-me', false:'from-them'}[!event.sender || event.sender === currentUser.id]">{{event.text}}</div>
+
+		    <!--<div class="timestamp" caas-time-stamp="{{event.id}}"></div>-->
+
+		    <div ng-if="event.seen" class="seen">
+		    	<div ng-repeat="seen in event.seen track by seen.user" ng-if="seen.user !== currentUser.id && seen.user !== event.sender">
+			    	<img seen-src>
+			    </div>
+		    </div>
+		</div>
+
+		<div ng-if="event.type.indexOf('notification') !== -1" class="notification">
+			<span>{{event.text}}</span>
+		</div>
+	</div>
+
+	<div ng-repeat="user in currentChatRoom.users track by user.id" ng-if="user.writting" class="line clearfix">
+		<div>
+			<img ng-src="{{user.photo || 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDAiIGhlaWdodD0iMTQwIj48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI2VlZSIvPjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjcwIiB5PSI3MCIgc3R5bGU9ImZpbGw6I2FhYTtmb250LXdlaWdodDpib2xkO2ZvbnQtc2l6ZToxMnB4O2ZvbnQtZmFtaWx5OkFyaWFsLEhlbHZldGljYSxzYW5zLXNlcmlmO2RvbWluYW50LWJhc2VsaW5lOmNlbnRyYWwiPjE0MHgxNDA8L3RleHQ+PC9zdmc+'}}" alt="..." class="pull-left userImage">
+			<div class="from-them writting">
+		      <div class="bounce1"></div>
+		      <div class="bounce2"></div>
+		      <div class="bounce3"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div ng-controller="chatFooterCtrl" ng-show="currentChatRoom && isActiveUser()">
+	<div class="footer">
+		<div>
+			<textarea id="chatBox" ng-model="currentChatRoom.message.text" ng-keydown="chatBoxKeydown($event)" ng-keyup="updateChatBox()" ng-focus="chatBoxFocus()" rows="1"></textarea>
+		</div>
+		<a ng-click="send()" class="pull-right"><i class="fa fa-send-o fa-lg"></i></a>
+	</div>
+</div>

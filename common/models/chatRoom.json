@@ -1,0 +1,60 @@
+{
+  "name": "chatRoom",
+  "base": "PersistedModel",
+  "options": {
+    "mysql": {
+      "table": "chatRoom"
+    },
+    "mongodb": {
+      "collection": "chatRoom"
+    },
+    "oracle": {
+      "schema": "DEMO",
+      "table": "PRODUCT"
+    }
+  },
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "users": {
+      "type": "array"
+    },
+    "oldUsers": {
+      "type": "array"
+    },
+    "shareLocation": {
+      "type": "array"
+    },
+    "seen": {
+      "type": "array"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "event": {
+      "type": "hasMany",
+      "model": "event",
+      "foreignKey": "chatRoom"
+    },
+    "app": {
+      "type": "belongsTo",
+      "model": "app",
+      "foreignKey": "appId"
+    },
+    "appPage": {
+      "type": "belongsTo",
+      "model": "appPage",
+      "foreignKey": "appPageId"
+    }
+  },
+  "acls": [
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "accessType": "*"
+    }
+  ],
+  "methods": []
+}

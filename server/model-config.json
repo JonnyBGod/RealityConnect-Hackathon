@@ -1,6 +1,8 @@
 {
   "_meta": {
     "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
       "../common/models",
       "./models"
     ]
@@ -31,5 +33,17 @@
   "Role": {
     "dataSource": "db",
     "public": false
+  },
+  "chatRoom": {
+    "dataSource": "db"
+  },
+  "event": {
+    "dataSource": "db"
+  },
+  "app": {
+    "dataSource": "db"
+  },
+  "appPage": {
+    "dataSource": "db"
   }
 }

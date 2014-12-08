@@ -1,0 +1,219 @@
+.navigation {
+    background: rgba(0, 0, 0, 0.2);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 44px;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
+
+    .menu {
+      list-style: none;
+      background: white;
+      width: 85%;
+      max-width: 320px;
+      height: 100%;
+      -o-transform: translate3d(-100%,0,0);
+      -moz-transform: translate3d(-100%,0,0);
+      -webkit-transform: translate3d(-100%,0,0);
+      transform: translate3d(-100%,0,0);
+      -o-transition: .3s ease all;
+      -moz-transition: .3s ease all;
+      -webkit-transition: .3s ease all;
+      transition: .3s ease all;
+    }
+
+    &.open {
+      z-index: 100;
+
+      .menu {
+        -o-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -webkit-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+      }
+    }
+
+    .menu {
+    	padding: 0;
+
+    	li {
+    		position: relative;
+    		padding: 10px 0;
+
+    		a {
+    			color: #3f4549 !important;
+    			cursor: pointer;
+
+    			i {
+	    			margin: 0 16px;
+	    		}
+
+	    		span {
+            position: absolute;
+            left: 50px;
+            right: 60px;
+          }
+
+          span.badge {
+            position: absolute;
+            left: auto;
+            right: 20px;
+            background-color: #5AD427;
+          }
+    		}
+
+    		&.divider {
+    			border-bottom: 1px solid #e5e5e5;
+    			padding: 0;
+    			margin: 10px 0;
+    		}
+
+        &.details {
+          > img {
+            max-height: 80px;
+            border-radius: 100%;
+            margin: 0 10px;
+          }
+
+          > h4 {
+            display: inline-block;
+          }
+        }
+    	}
+    }
+}
+
+.home > .view {
+	position: absolute;
+	top: 44px;
+	bottom: 0;
+	left: 0;
+	width: 300%;
+	background: white;
+    -o-transform: translate3d(0,0,0);
+    -moz-transform: translate3d(0,0,0);
+    -webkit-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+    -o-transition: .3s ease all;
+    -moz-transition: .3s ease all;
+    -webkit-transition: .3s ease all;
+    transition: .3s ease all;
+
+    &.chatRoom {
+    	-o-transform: translate3d(-33.333%,0,0);
+	    -moz-transform: translate3d(-33.333%,0,0);
+	    -webkit-transform: translate3d(-33.333%,0,0);
+    	transform: translate3d(-33.333%,0,0);
+    }
+
+    &.details {
+    	-o-transform: translate3d(-66.666%,0,0);
+	    -moz-transform: translate3d(-66.666%,0,0);
+	    -webkit-transform: translate3d(-66.666%,0,0);
+    	transform: translate3d(-66.666%,0,0);
+    }
+
+    @include breakpoint(small) {
+		width: 140%;
+
+		&.chatRoom {
+			-o-transform: translate3d(0,0,0);
+		    -moz-transform: translate3d(0,0,0);
+		    -webkit-transform: translate3d(0,0,0);
+	    	transform: translate3d(0,0,0);
+	    }
+
+	    &.details {
+	    	-o-transform: translate3d(-28%,0,0);
+		    -moz-transform: translate3d(-28%,0,0);
+		    -webkit-transform: translate3d(-28%,0,0);
+	    	transform: translate3d(-28%,0,0);
+	    }
+	}
+
+	@include breakpoint(medium) {
+		width: 135%;
+
+		&.details {
+			-o-transform: translate3d(-24%,0,0);
+		    -moz-transform: translate3d(-24%,0,0);
+		    -webkit-transform: translate3d(-24%,0,0);
+	    	transform: translate3d(-24%,0,0);
+	    }
+	}
+
+	@import "_home.roomsView.scss";
+	@import "_home.chatView.scss";
+	@import "_home.chatDetailsView.scss";
+
+  .download {
+    display: block;
+    text-align: center;
+    color: #8E8E93;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 20px;
+    border: 1px solid #8E8E93;
+    padding: 6px 8px;
+
+    .fa-cloud-download {
+      display: block;
+      text-align: center;
+    }
+
+    &:hover {
+      text-decoration: none;
+      border: 1px solid #4A4A4A;
+
+      .fa-cloud-download {
+        color: #4A4A4A;
+      }
+    }
+
+    &:active > .fa-cloud-download {
+      color: #53d76a;
+    }
+  }
+}
+
+audio,
+canvas,
+video {
+  max-width: 100%;
+}
+
+.addContacts {
+  background: white;
+}
+
+@-webkit-keyframes bounce {
+	0%, 100% { -webkit-transform: scale(0.0) }
+	50% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes bounce {
+	0%, 100% { 
+		transform: scale(0.0);
+		-webkit-transform: scale(0.0);
+	} 50% { 
+		transform: scale(1.0);
+		-webkit-transform: scale(1.0);
+	}
+}
+
+@-webkit-keyframes bouncedelay {
+	0%, 80%, 100% { -webkit-transform: scale(0.0) }
+	40% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes bouncedelay {
+	0%, 80%, 100% {
+		transform: scale(0.0);
+		-webkit-transform: scale(0.0);
+	} 40% {
+		transform: scale(1.0);
+		-webkit-transform: scale(1.0);
+	}
+}

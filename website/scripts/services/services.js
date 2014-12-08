@@ -17,7 +17,7 @@ angular.module('services', ['lbServices'])
           var self = this;
           self.currentUser = User.getCurrent(function(response) {
             // success
-            /*User.apps({id: self.currentUser.id}, 
+            User.apps({id: self.currentUser.id}, 
               function (res) {
                 self.currentUser.apps = res;
                 if (response.username) {
@@ -28,7 +28,7 @@ angular.module('services', ['lbServices'])
               },
               function () {
               }
-            );*/
+            ); 
           }, function(response) {
             console.log(response);
           });
@@ -59,64 +59,6 @@ angular.module('services', ['lbServices'])
             $window.location.reload();
           }
         });
-      }
-    };
-  })
-  .factory('socket', function($rootScope, LoopBackAuth, AppAuth, $notification) {
-    return {
-      socket: false,
-      connect: function (token) {
-        var self = this;
-        if (!self.socket) {
-          self.socket = io('/', {
-            'query': 'access_token=' + LoopBackAuth.accessTokenId
-          });
-
-          self.on('connection', function(data) {
-            console.log('connect');
-          });
-
-          self.on('connection_error', function(data) {
-            console.log('connect_error');
-          });
-
-          self.on('message', function(data) {
-            console.log('message');
-          });
-        }
-      },
-      on: function(eventName, callback) {
-        var self = this;
-        self.socket.on(eventName, function() {
-          var args = arguments;
-          $rootScope.$apply(function() {
-            callback.apply(self.socket, args);
-          });
-        });
-      },
-      emit: function(eventName, data, callback) {
-        var self = this;
-        self.socket.emit(eventName, data, function() {
-          var args = arguments;
-          $rootScope.$apply(function() {
-            if(callback) {
-              callback.apply(self.socket, args);
-            }
-          });
-        });
-      },
-      json: {
-        send: function(data, callback) {
-          var self = this;
-          self.socket.json.send(data, function() {
-            var args = arguments;
-            $rootScope.$apply(function() {
-              if(callback) {
-                callback.apply(self.socket, args);
-              }
-            });
-          });
-        }
       }
     };
   });

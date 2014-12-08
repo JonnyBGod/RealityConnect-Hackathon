@@ -42,6 +42,48 @@ module.exports = function (grunt) {
         files: ['website/styles/{,*/}*.{scss,sass}'],
         tasks: ['compass:website', 'autoprefixer:website']
       },
+      bowerChat: {
+        files: ['bower.json'],
+        tasks: ['wiredep:chat']
+      },
+      jsChat: {
+        files: ['chat/scripts/{,*/}*.js'],
+        tasks: ['newer:jshint:chat'],
+        options: {
+          livereload: {
+            port: 35729
+          }
+        }
+      },
+      jsTestChat: {
+        files: ['chat/test/spec/{,*/}*.js'],
+        tasks: ['newer:jshint:chat', 'karma:chat']
+      },
+      compassChat: {
+        files: ['chat/styles/{,*/}*.{scss,sass}'],
+        tasks: ['compass:chat', 'autoprefixer:chat']
+      },
+      bowerWidget: {
+        files: ['bower.json'],
+        tasks: ['wiredep:widget', 'wiredep:widgetLogin']
+      },
+      jsWidget: {
+        files: ['widget/scripts/{,*/}*.js'],
+        tasks: ['newer:jshint:widget'],
+        options: {
+          livereload: {
+            port: 35729
+          }
+        }
+      },
+      jsTestWidget: {
+        files: ['widget/test/spec/{,*/}*.js'],
+        tasks: ['newer:jshint:widget', 'karma:widget']
+      },
+      compassWidget: {
+        files: ['widget/styles/{,*/}*.{scss,sass}'],
+        tasks: ['compass:widget', 'autoprefixer:widget']
+      },
       lbclient: {
         files: [
           'lbclient/models/*',
@@ -77,6 +119,12 @@ module.exports = function (grunt) {
           'website/{,*/}*.html',
           'website/.tmp/styles/{,*/}*.css',
           'website/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+          'chat/{,*/}*.html',
+          'chat/.tmp/styles/{,*/}*.css',
+          'chat/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+          'widget/{,*/}*.html',
+          'widget/.tmp/styles/{,*/}*.css',
+          'widget/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
           'lbclient/browser.bundle.js'
         ]
       }
@@ -92,6 +140,16 @@ module.exports = function (grunt) {
         src: [
           'Gruntfile.js',
           'website/scripts/{,*/}*.js'
+        ]
+      },
+      chat: {
+        src: [
+          'chat/scripts/{,*/}*.js'
+        ]
+      },
+      widget: {
+        src: [
+          'widget/scripts/{,*/}*.js'
         ]
       },
       test: {
@@ -112,11 +170,17 @@ module.exports = function (grunt) {
             'website/.tmp',
             'client/website/{,*/}*',
             '!client/website/.git*',
+            'chat/.tmp',
+            'client/chat/{,*/}*',
+            '!client/chat/.git*',
+            'widget/.tmp',
+            'client/widget/{,*/}*',
+            '!client/widget/.git*',
             'lbclient/browser.bundle.js'
           ]
         }]
       },
-      server: ['website/.tmp']
+      server: ['website/.tmp', 'chat/.tmp', 'widget/.tmp']
     },
 
     // Add vendor prefixed styles
@@ -131,19 +195,32 @@ module.exports = function (grunt) {
           src: '{,*/}*.css',
           dest: 'website/.tmp/styles/'
         }]
+      },
+      chat: {
+        files: [{
+          expand: true,
+          cwd: 'chat/.tmp/styles/',
+          src: '{,*/}*.css',
+          dest: 'chat/.tmp/styles/'
+        }]
+      },
+      widget: {
+        files: [{
+          expand: true,
+          cwd: 'widget/.tmp/styles/',
+          src: '{,*/}*.css',
+          dest: 'widget/.tmp/styles/'
+        }]
       }
     },
 
     // Automatically inject Bower components into the app
     wiredep: {
       options: {
-        cwd: ''
+        cwd: '.'
       },
       website: {
-        //cwd:'website',
-        bowerJson: './bower.json',
-        directory: './bower_components/',
-        src: ['/website/index.html'],
+        src: ['website/index.html'],
         ignorePath:  /\.\.\//,
         fileTypes: {
           html: {
@@ -156,17 +233,18 @@ module.exports = function (grunt) {
         exclude: [
           '/bower_components/es5-shim/es5-shim.js',
           '/bower_components/json3/lib/json3.js',
-          '/bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/affix.js',
-          '/bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/alert.js',
-          '/bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/button.js',
-          '/bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/carousel.js',
-          '/bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/collapse.js',
-          '/bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/tab.js',
-          '/bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/transition.js',
-          '/bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/scrollspy.js',
-          '/bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/modal.js',
-          '/bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/tooltip.js',
-          '/bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/popover.js',
+          '/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/affix.js',
+          '/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/alert.js',
+          '/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/button.js',
+          '/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/carousel.js',
+          '/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/collapse.js',
+          '/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tab.js',
+          '/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/transition.js',
+          '/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/scrollspy.js',
+          '/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/modal.js',
+          '/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tooltip.js',
+          '/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/popover.js',
+          '/bower_components/angular-route/angular-route.js',
           '/bower_components/angulartics/src/angulartics-adobe.js',
           '/bower_components/angulartics/src/angulartics-chartbeat.js',
           '/bower_components/angulartics/src/angulartics-flurry.js',
@@ -179,14 +257,158 @@ module.exports = function (grunt) {
           '/bower_components/angulartics/src/angulartics-segmentio.js',
           '/bower_components/angulartics/src/angulartics-splunk.js',
           '/bower_components/angulartics/src/angulartics-woopra.js',
+          '/bower_components/angulartics/src/angulartics-cnzz.js',
+          '/bower_components/angulartics/src/angulartics-marketo.js',
+          '/bower_components/angulartics/src/angulartics-intercom.js',
           '/bower_components/jquery-waypoints/waypoints.js'
         ],
       },
       sassWebsite: {
-        //cwd:'website',
-        bowerJson: './bower.json',
-        directory: './bower_components/',
-        src: ['/website/styles/{,*/}*.{scss,sass}'],
+        src: ['website/styles/{,*/}*.{scss,sass}'],
+        ignorePath: /(\.\.\/){1,2}bower_components\//
+      },
+      chat: {
+        src: ['chat/index.html'],
+        ignorePath:  /\.\.\//,
+        fileTypes: {
+          html: {
+            replace: {
+              js: '<script src="/{{filePath}}"></script>',
+              css: '<link rel="stylesheet" href="/{{filePath}}" />'
+            }
+          }
+        },
+        exclude: [
+          'bower_components/es5-shim/es5-shim.js',
+          'bower_components/json3/lib/json3.js',
+          'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/affix.js',
+          'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/alert.js',
+          'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/button.js',
+          'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/carousel.js',
+          'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/collapse.js',
+          'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tab.js',
+          'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/transition.js',
+          'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/scrollspy.js',
+          'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/modal.js',
+          'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tooltip.js',
+          'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/popover.js',
+          '/bower_components/angular-route/angular-route.js',
+          'bower_components/angulartics/src/angulartics-adobe.js',
+          'bower_components/angulartics/src/angulartics-chartbeat.js',
+          'bower_components/angulartics/src/angulartics-flurry.js',
+          'bower_components/angulartics/src/angulartics-ga-cordova.js',
+          'bower_components/angulartics/src/angulartics-gtm.js',
+          'bower_components/angulartics/src/angulartics-kissmetrics.js',
+          'bower_components/angulartics/src/angulartics-mixpanel.js',
+          'bower_components/angulartics/src/angulartics-piwik.js',
+          'bower_components/angulartics/src/angulartics-scroll.js',
+          'bower_components/angulartics/src/angulartics-segmentio.js',
+          'bower_components/angulartics/src/angulartics-splunk.js',
+          'bower_components/angulartics/src/angulartics-woopra.js',
+          '/bower_components/angulartics/src/angulartics-cnzz.js',
+          '/bower_components/angulartics/src/angulartics-marketo.js',
+          '/bower_components/angulartics/src/angulartics-intercom.js',
+          'bower_components/jquery-waypoints/waypoints.js',
+          'bower_components/moment/moment.js',
+          'bower_components/requirejs/require.js'
+        ],
+      },
+      sassChat: {
+        src: ['chat/styles/{,*/}*.{scss,sass}'],
+        ignorePath: /(\.\.\/){1,2}bower_components\//
+      },
+      widget: {
+        src: ['widget/index.html'],
+        ignorePath:  /\.\.\//,
+        fileTypes: {
+          html: {
+            replace: {
+              js: '<script src="/{{filePath}}"></script>',
+              css: '<link rel="stylesheet" href="/{{filePath}}" />'
+            }
+          }
+        },
+        exclude: [
+          '/bower_components/es5-shim/es5-shim.js',
+          '/bower_components/json3/lib/json3.js',
+          '/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/affix.js',
+          '/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/alert.js',
+          '/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/button.js',
+          '/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/carousel.js',
+          '/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/collapse.js',
+          '/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tab.js',
+          '/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/transition.js',
+          '/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/scrollspy.js',
+          '/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/modal.js',
+          '/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tooltip.js',
+          '/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/popover.js',
+          '/bower_components/angular-ui-router/release/angular-ui-router.js',
+          '/bower_components/angulartics/src/angulartics-adobe.js',
+          '/bower_components/angulartics/src/angulartics-chartbeat.js',
+          '/bower_components/angulartics/src/angulartics-flurry.js',
+          '/bower_components/angulartics/src/angulartics-ga-cordova.js',
+          '/bower_components/angulartics/src/angulartics-ga.js',
+          '/bower_components/angulartics/src/angulartics-kissmetrics.js',
+          '/bower_components/angulartics/src/angulartics-mixpanel.js',
+          '/bower_components/angulartics/src/angulartics-piwik.js',
+          '/bower_components/angulartics/src/angulartics-scroll.js',
+          '/bower_components/angulartics/src/angulartics-segmentio.js',
+          '/bower_components/angulartics/src/angulartics-splunk.js',
+          '/bower_components/angulartics/src/angulartics-woopra.js',
+          '/bower_components/angulartics/src/angulartics-cnzz.js',
+          '/bower_components/angulartics/src/angulartics-marketo.js',
+          '/bower_components/angulartics/src/angulartics-intercom.js',
+          '/bower_components/jquery-waypoints/waypoints.js'
+        ],
+      },
+      widgetLogin: {
+        src: ['widget/auth/index.html'],
+        ignorePath:  /\.\.\//,
+        fileTypes: {
+          html: {
+            replace: {
+              js: '<script src="/{{filePath}}"></script>',
+              css: '<link rel="stylesheet" href="/{{filePath}}" />'
+            }
+          }
+        },
+        exclude: [
+          'bower_components/es5-shim/es5-shim.js',
+          'bower_components/json3/lib/json3.js',
+          'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/affix.js',
+          'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/alert.js',
+          'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/button.js',
+          'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/carousel.js',
+          'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/collapse.js',
+          'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tab.js',
+          'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/transition.js',
+          'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/scrollspy.js',
+          'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/modal.js',
+          'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tooltip.js',
+          'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/popover.js',
+          '/bower_components/angular-route/angular-route.js',
+          'bower_components/angulartics/src/angulartics-adobe.js',
+          'bower_components/angulartics/src/angulartics-chartbeat.js',
+          'bower_components/angulartics/src/angulartics-flurry.js',
+          'bower_components/angulartics/src/angulartics-ga-cordova.js',
+          'bower_components/angulartics/src/angulartics-gtm.js',
+          'bower_components/angulartics/src/angulartics-kissmetrics.js',
+          'bower_components/angulartics/src/angulartics-mixpanel.js',
+          'bower_components/angulartics/src/angulartics-piwik.js',
+          'bower_components/angulartics/src/angulartics-scroll.js',
+          'bower_components/angulartics/src/angulartics-segmentio.js',
+          'bower_components/angulartics/src/angulartics-splunk.js',
+          'bower_components/angulartics/src/angulartics-woopra.js',
+          '/bower_components/angulartics/src/angulartics-cnzz.js',
+          '/bower_components/angulartics/src/angulartics-marketo.js',
+          '/bower_components/angulartics/src/angulartics-intercom.js',
+          'bower_components/jquery-waypoints/waypoints.js',
+          'bower_components/moment/moment.js',
+          'bower_components/requirejs/require.js'
+        ],
+      },
+      sassWidget: {
+        src: ['widget/styles/{,*/}*.{scss,sass}'],
         ignorePath: /(\.\.\/){1,2}bower_components\//
       }
     },
@@ -210,6 +432,40 @@ module.exports = function (grunt) {
           raw: 'Sass::Script::Number.precision = 10\n'
         }
       },
+      chat: {
+        options: {
+          sassDir: 'chat/styles',
+          cssDir: 'chat/.tmp/styles',
+          generatedImagesDir: 'chat/.tmp/images/generated',
+          imagesDir: 'chat/images',
+          javascriptsDir: 'chat/scripts',
+          fontsDir: 'chat/styles/fonts',
+          importPath: './bower_components',
+          httpImagesPath: 'chat/images',
+          httpGeneratedImagesPath: 'chat/images/generated',
+          httpFontsPath: 'chat/styles/fonts',
+          relativeAssets: false,
+          assetCacheBuster: false,
+          raw: 'Sass::Script::Number.precision = 10\n'
+        }
+      },
+      widget: {
+        options: {
+          sassDir: 'widget/styles',
+          cssDir: 'widget/.tmp/styles',
+          generatedImagesDir: 'widget/.tmp/images/generated',
+          imagesDir: 'widget/images',
+          javascriptsDir: 'widget/scripts',
+          fontsDir: 'widget/styles/fonts',
+          importPath: './bower_components',
+          httpImagesPath: 'widget/images',
+          httpGeneratedImagesPath: 'widget/images/generated',
+          httpFontsPath: 'widget/styles/fonts',
+          relativeAssets: false,
+          assetCacheBuster: false,
+          raw: 'Sass::Script::Number.precision = 10\n'
+        }
+      },
       dist: {
         options: {
           generatedImagesDir: 'client/website/images/generated'
@@ -227,7 +483,7 @@ module.exports = function (grunt) {
         options: {
           input: 'server/server.js',
           output: 'client/lb-services.js',
-          apiUrl: 'http://localhost:3000/'
+          apiUrl: '/api'
         }
       }
     },
@@ -256,6 +512,22 @@ module.exports = function (grunt) {
           'client/website/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
           'client/website/styles/fonts/*'
         ]
+      },
+      chat: {
+        src: [
+          'client/chat/scripts/{,*/}*.js',
+          'client/chat/styles/{,*/}*.css',
+          'client/chat/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+          'client/chat/styles/fonts/*'
+        ]
+      },
+      widget: {
+        src: [
+          'client/widget/scripts/{,*/}*.js',
+          'client/widget/styles/{,*/}*.css',
+          'client/widget/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+          'client/widget/styles/fonts/*'
+        ]
       }
     },
 
@@ -268,6 +540,18 @@ module.exports = function (grunt) {
           dest: 'client/website'
         },
         src: ['website/index.html'],
+      },
+      chat: {
+        options: {
+          dest: 'client/chat'
+        },
+        src: ['chat/index.html'],
+      },
+      widget: {
+        options: {
+          dest: 'client/widget'
+        },
+        src: ['widget/index.html'],
       }
     },
 
@@ -287,6 +571,34 @@ module.exports = function (grunt) {
         },
         files: { src: ['client/website/styles/{,*/}*.css'] }
       },
+      'chat-html': {
+        options: {
+          assetsDirs: ['client/chat','client/chat/images'],
+          type:'html'
+        },
+        files: { src: ['client/chat/{,*/}*.html'] }
+      },
+      'chat-css': {
+        options: {
+          assetsDirs: ['client/chat','client/chat/images'],
+          type:'css'
+        },
+        files: { src: ['client/chat/styles/{,*/}*.css'] }
+      },
+      'widget-html': {
+        options: {
+          assetsDirs: ['client/widget','client/widget/images'],
+          type:'html'
+        },
+        files: { src: ['client/widget/{,*/}*.html'] }
+      },
+      'widget-css': {
+        options: {
+          assetsDirs: ['client/widget','client/widget/images'],
+          type:'css'
+        },
+        files: { src: ['client/widget/styles/{,*/}*.css'] }
+      }
     },
 
     imagemin: {
@@ -296,6 +608,16 @@ module.exports = function (grunt) {
           cwd: 'website/images',
           src: '{,*/}*.{png,jpg,jpeg,gif}',
           dest: 'client/website/images'
+        },{
+          expand: true,
+          cwd: 'chat/images',
+          src: '{,*/}*.{png,jpg,jpeg,gif}',
+          dest: 'client/chat/images'
+        },{
+          expand: true,
+          cwd: 'widget/images',
+          src: '{,*/}*.{png,jpg,jpeg,gif}',
+          dest: 'client/widget/images'
         }]
       }
     },
@@ -307,6 +629,16 @@ module.exports = function (grunt) {
           cwd: 'website/images',
           src: '{,*/}*.svg',
           dest: 'client/website/images'
+        },{
+          expand: true,
+          cwd: 'chat/images',
+          src: '{,*/}*.svg',
+          dest: 'client/chat/images'
+        },{
+          expand: true,
+          cwd: 'widget/images',
+          src: '{,*/}*.svg',
+          dest: 'client/widget/images'
         }]
       }
     },
@@ -325,6 +657,16 @@ module.exports = function (grunt) {
           cwd: 'client/website',
           src: ['*.html', 'views/{,*/}*.html'],
           dest: 'client/website'
+        },{
+          expand: true,
+          cwd: 'client/chat',
+          src: ['*.html', 'views/{,*/}*.html'],
+          dest: 'client/chat'
+        },{
+          expand: true,
+          cwd: 'client/widget',
+          src: ['*.html', 'views/{,*/}*.html'],
+          dest: 'client/widget'
         }]
       }
     },
@@ -348,13 +690,23 @@ module.exports = function (grunt) {
         src: [ 'website/scripts/**/*.js', 'website/**/*.html' ],
         lang: ['en'],
         dest: 'website/locales'
+      },
+      chat: {
+        src: [ 'chat/scripts/**/*.js', 'chat/**/*.html' ],
+        lang: ['en'],
+        dest: 'chat/locales'
+      },
+      widget: {
+        src: [ 'widget/scripts/**/*.js', 'widget/**/*.html' ],
+        lang: ['en'],
+        dest: 'widget/locales'
       }
     },
 
     // Replace Google CDN references
     cdnify: {
       dist: {
-        html: ['client/website/*.html']
+        html: ['client/website/*.html', 'client/chat/*.html', 'client/widget/*.html']
       }
     },
 
@@ -384,6 +736,52 @@ module.exports = function (grunt) {
           cwd: 'website/locales/',
           src: '**',
           dest: 'client/website/locales/'
+        },{
+          expand: true,
+          dot: true,
+          cwd: 'chat',
+          dest: 'client/chat',
+          src: [
+            '*.{ico,png,txt}',
+            '.htaccess',
+            '*.html',
+            'views/{,*/}*.html',
+            'images/{,*/}*.{webp}',
+            'fonts/*'
+          ]
+        }, {
+          expand: true,
+          cwd: '.tmp/images',
+          dest: 'client/chat/images',
+          src: ['generated/*']
+        }, {
+          expand: true,
+          cwd: 'chat/locales/',
+          src: '**',
+          dest: 'client/chat/locales/'
+        },{
+          expand: true,
+          dot: true,
+          cwd: 'widget',
+          dest: 'client/widget',
+          src: [
+            '*.{ico,png,txt}',
+            '.htaccess',
+            '*.html',
+            'views/{,*/}*.html',
+            'images/{,*/}*.{webp}',
+            'fonts/*'
+          ]
+        }, {
+          expand: true,
+          cwd: '.tmp/images',
+          dest: 'client/widget/images',
+          src: ['generated/*']
+        }, {
+          expand: true,
+          cwd: 'widget/locales/',
+          src: '**',
+          dest: 'client/widget/locales/'
         }]
       },
       styles: {
@@ -401,7 +799,7 @@ module.exports = function (grunt) {
           logConcurrentOutput: true,
         },
         tasks: [
-          'compass',
+          //'compass',
           'nodemon:dev',
           'watch'
         ]
@@ -496,15 +894,16 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('dev', [
-    'build-lbclient',
+    //'loopback_sdk_angular',
+    //'build-lbclient',
     'wiredep',
     'autoprefixer',
     'concurrent:nodemon_dev'
   ]);
 
   grunt.registerTask('prod', [
-    'build-lbclient',
-    'docular',
+    //'build-lbclient',
+    //'docular',
     'concurrent:nodemon_prod'
   ]);
 
@@ -513,7 +912,8 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('build', [
-    'build-lbclient',
+    //'build-lbclient',
+    'loopback_sdk_angular',
     'buildClients'
   ]);
 };

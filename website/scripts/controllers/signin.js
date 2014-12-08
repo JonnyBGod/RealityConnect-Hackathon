@@ -1,12 +1,5 @@
 'use strict';
 
-/**
- * @ngdoc function
- * @name caaSwebsiteApp.controller:AboutCtrl
- * @description
- * # AboutCtrl
- * Controller of the caaSwebsiteApp
- */
 angular.module('App')
   	.controller('signinCtrl', function ($scope, $state, $stateParams, $location, User, AppAuth, LoopBackAuth) {
     	$scope.err = false;

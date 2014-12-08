@@ -1,0 +1,18 @@
+<div class="searchBox">
+	<input type="text" ng-model="searchFilter" placeholder="Search"/>
+	<a ui-sref="newRoom"><i class="fa fa-plus-circle fa-lg"></i></a>
+</div>
+
+<ul class="list">
+	<li ng-repeat="chatRoom in currentUser.chatRooms | filter: { app: '!!'} | filter:searchFilter track by chatRoom.id" ng-class="{selected: chatRoom.id === currentChatRoom.id}" ng-click="openChatRoom()" >
+		<div class="clearfix">
+			<img ng-src="{{chatRoom.users[0].photo || 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDAiIGhlaWdodD0iMTQwIj48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI2VlZSIvPjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjcwIiB5PSI3MCIgc3R5bGU9ImZpbGw6I2FhYTtmb250LXdlaWdodDpib2xkO2ZvbnQtc2l6ZToxMnB4O2ZvbnQtZmFtaWx5OkFyaWFsLEhlbHZldGljYSxzYW5zLXNlcmlmO2RvbWluYW50LWJhc2VsaW5lOmNlbnRyYWwiPjE0MHgxNDA8L3RleHQ+PC9zdmc+'}}" alt="..." class="pull-left">
+			<img ng-src="{{chatRoom.appPage.url.protocol}}//{{chatRoom.appPage.url.host}}/favicon.ico" class="appIcon">
+
+			<h5>{{chatRoom.name || chatRoom.appPage.meta.title || chatRoom.users[0].name}}</h5>
+			<div ng-if="chatRoom.events[chatRoom.events.length -1].text" ng-bind-html="chatRoom.events[chatRoom.events.length -1].text"></div>
+			<div ng-if="!chatRoom.events[chatRoom.events.length -1].text"></div>
+			<span>{{chatRoom.events[chatRoom.events.length -1].id || chatRoom.id | caasTime}}</span>
+		</div>
+	</li>
+</ul>

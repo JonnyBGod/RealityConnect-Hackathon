@@ -1,12 +1,5 @@
 'use strict';
 
-/**
- * @ngdoc function
- * @name caaSwebsiteApp.controller:MainCtrl
- * @description
- * # MainCtrl
- * Controller of the caaSwebsiteApp
- */
 angular.module('App')
 	.controller('headerCtrl', function ($scope, User, $location, AppAuth) {
 		$scope.currentUser = AppAuth.currentUser;

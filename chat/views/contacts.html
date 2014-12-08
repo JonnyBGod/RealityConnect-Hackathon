@@ -1,0 +1,50 @@
+<div class="contacts">
+  <div class="header clearfix" ng-controller="headerCtrl">
+    <div class="center" translate>Contacts</div>
+    <h4 class="text-muted pull-left">
+      <a ng-click="goBack()">&nbsp;<i class="fa fa-angle-left fa-lg"></i>&nbsp;<i class="fa fa-comments-o fa-lg"></i></a>
+      &nbsp;&nbsp;
+    </h4>
+    <ul class="nav nav-pills pull-left">
+      <li class="appstore">
+          <a href="https://itunes.apple.com/us/app/wechat/id414478124?mt=8&uo=4" target="itunes_store">
+              <img src="https://linkmaker.itunes.apple.com/htmlResources/assets/en_us//images/web/linkmaker/badge_appstore-lrg.png">
+          </a>
+      </li>
+      <li class="appstore">
+          <a href="https://play.google.com/store/apps/details?id=dfghfdgh">
+              <img alt="Android app on Google Play" src="//developer.android.com/images/brand/en_app_rgb_wo_45.png" />
+          </a>
+      </li>
+    </ul>
+    <ul class="nav nav-pills navbar-right">
+      <li><a ng-href="/chat/contacts/add/" class="pull-left"><i class="fa fa-plus fa-lg"></i></a></li>
+    </ul>
+  </div>
+
+  <div class="searchBox">
+    <input type="text" ng-model="searchFilter" placeholder="Search"/>
+  </div>
+
+
+  <div class="list">
+    <div ng-repeat="group in groups | filter:searchFilter">
+      <div class="group-label"><span>{{ group.label }}</span></div>
+      <ul>
+        <li class="list-item clearfix" ng-repeat="contact in group.contacts" ng-click="openProfile()">
+          <img ng-src="{{::contact.photo || 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDAiIGhlaWdodD0iMTQwIj48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI2VlZSIvPjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjcwIiB5PSI3MCIgc3R5bGU9ImZpbGw6I2FhYTtmb250LXdlaWdodDpib2xkO2ZvbnQtc2l6ZToxMnB4O2ZvbnQtZmFtaWx5OkFyaWFsLEhlbHZldGljYSxzYW5zLXNlcmlmO2RvbWluYW50LWJhc2VsaW5lOmNlbnRyYWwiPjE0MHgxNDA8L3RleHQ+PC9zdmc+'}}" alt="..." class="pull-left">
+          <h4>{{::contact.name}}</h4>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!--<div class="list" ng-if="searchFilter.length">
+    <ul>
+      <li class="list-item clearfix" ng-repeat="contact in ::contacts | filter:searchFilter" ng-click="openProfile()">
+        <img ng-src="{{::contact.photo || 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDAiIGhlaWdodD0iMTQwIj48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI2VlZSIvPjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjcwIiB5PSI3MCIgc3R5bGU9ImZpbGw6I2FhYTtmb250LXdlaWdodDpib2xkO2ZvbnQtc2l6ZToxMnB4O2ZvbnQtZmFtaWx5OkFyaWFsLEhlbHZldGljYSxzYW5zLXNlcmlmO2RvbWluYW50LWJhc2VsaW5lOmNlbnRyYWwiPjE0MHgxNDA8L3RleHQ+PC9zdmc+'}}" alt="..." class="pull-left">
+        <h4>{{::contact.name}}</h4>
+      </li>
+    </ul>
+  </div>-->
+</div>

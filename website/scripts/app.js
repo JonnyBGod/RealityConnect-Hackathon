@@ -1,13 +1,5 @@
 'use strict';
 
-/**
- * @ngdoc overview
- * @name caaSwebsiteApp
- * @description
- * # caaSwebsiteApp
- *
- * Main module of the application.
- */
 angular
   .module('App', [
     'ngAnimate',
@@ -103,16 +95,6 @@ angular
         },
         public: true
       })
-      .state('theapp', {
-        url: '/theapp/',
-        views: {
-          'mainview@': {
-            templateUrl: '/views/theapp.html',
-            controller: 'theappCtrl'
-          }
-        },
-        public: true
-      })
       .state('signin', {
         url: '/signin/',
         views: {
@@ -174,6 +156,79 @@ angular
           }
         }
       })
+      .state('apps', {
+        url: '/apps/',
+        views: {
+          'mainview@': {
+            templateUrl: '/views/apps.html',
+            controller: 'appsCtrl'
+          }
+        }
+      })
+      .state('apps.app', {
+        url: '{app}/',
+        abstract: true,
+        views: {
+          'mainview@': {
+            templateUrl: '/views/apps.html',
+            controller: 'appsCtrl'
+          }
+        }
+      })
+      .state('apps.app.analytics', {
+        url: '',
+        views: {
+          'nestedview@apps.app': {
+            templateUrl: '/views/apps.analytics.html',
+            controller: 'appsAnalyticsCtrl'
+          }
+        }
+      })
+      .state('apps.app.settings', {
+        url: 'settings/',
+        abstract: true,
+        views: {
+          'nestedview@apps.app': {
+            templateUrl: '/views/apps.settings.html'
+          }
+        }
+      })
+      .state('apps.app.settings.general', {
+        url: '',
+        views: {
+          'nestednestedview@apps.app.settings': {
+            templateUrl: '/views/apps.settings.general.html',
+            controller: 'appsSettingsGeneralCtrl'
+          }
+        }
+      })
+      .state('apps.app.settings.advanced', {
+        url: 'advanced/',
+        views: {
+          'nestednestedview@apps.app.settings': {
+            templateUrl: '/views/apps.settings.advanced.html',
+            controller: 'appsSettingsAdvancedCtrl'
+          }
+        }
+      })
+      .state('apps.app.settings.install', {
+        url: 'install/',
+        views: {
+          'nestednestedview@apps.app.settings': {
+            templateUrl: '/views/apps.settings.install.html',
+            controller: 'appsSettingsInstallCtrl'
+          }
+        }
+      })
+      .state('newapp', {
+        url: '/newapp/',
+        views: {
+          'mainview@': {
+            templateUrl: '/views/newapp.html',
+            controller: 'newappCtrl'
+          }
+        }
+      })
       .state('recover-account', {
         url: '/recover-account/',
         views: {
@@ -217,6 +272,7 @@ angular
 
       delete $cookies.userId;
       delete $cookies.access_token;
+
       AppAuth.ensureHasCurrentUser(User);
 
       Visibility.change(function (e, state) {

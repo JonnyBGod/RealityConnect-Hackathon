@@ -1,0 +1,187 @@
+.roomsView, .chatView, .chatDetailsView {
+	display: inline-block;
+	height: 100%;
+	margin: 0;
+}
+
+.roomsView {
+	width: 33.333%;
+	background: #FFF;
+	vertical-align: top;
+	position: relative;
+
+	@include breakpoint(small) {
+		width: 28%;
+		border-right: 1px solid #e5e5e5;
+	}
+
+	@include breakpoint(medium) {
+		width: 24%;
+	}
+
+	.nav {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		height: 60px;
+		background: #f7f7f7;
+		border-top: 1px solid #b8b8b8;
+
+		li > a {
+			line-height: 23px;
+			background: none !important;
+			padding: 5px;
+			border-radius: 0;
+			cursor: pointer;
+			margin-bottom: 0;
+			font-size: 0.9em;
+			color: #8e9093;
+			
+			&.active {
+				color: #5AD427;
+			}
+
+			> i {
+				display: block;
+			}
+		}
+	}
+
+	.searchBox {
+		background: #C7C7CC;
+		text-align: center;
+
+		input {
+			width: 85%;
+			border-radius: 3px;
+			background: #fafafa;
+			border: none;
+			outline: none;
+			padding-left: 4px;
+			line-height: 24px;
+			margin: 5px 0 7px;
+
+			&::-webkit-input-placeholder {
+			   text-align:center;
+			}
+
+			&:-moz-placeholder { /* Firefox 18- */
+			   text-align:center;  
+			}
+
+			&::-moz-placeholder {  /* Firefox 19+ */
+			   text-align:center;  
+			}
+
+			&:-ms-input-placeholder {  
+			   text-align:center; 
+			}
+		}
+
+		i {
+			float: right;
+			margin-top: 12px;
+			margin-right: 13px;
+			color: white;
+			cursor: pointer;
+		}
+	}
+
+	.list {
+		padding: 0;
+		margin: 0;
+		position: absolute;
+		top: 37px;
+		left: 0;
+		right: 0;
+		bottom: 65px;;
+
+		li {
+			margin-left: 0;
+			padding: 0;
+			list-style: none;
+			position: relative;
+			cursor: pointer;
+
+			> div {
+				margin-left: 20px;
+				padding: 10px 10px 10px 0;
+				list-style: none;
+				position: relative;
+				border-bottom: 1px solid #e5e5e5;
+
+				img {
+					width: 60px;
+					height: 60px;
+					border-radius: 60px;
+					margin-right: 6px;
+
+					&.appIcon {
+						position: absolute;
+						top: 10px;
+						left: 0;
+						width: 20px;
+						height: 20px;
+					}
+				}
+
+				h5 {
+					margin: 0;
+					padding: 0;
+					font-size: 1em;
+					height: 20px;
+					line-height: 20px;
+					max-width: 55%;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+				}
+
+				span {
+					position: absolute;
+					top: 10px;
+					right: 10px;
+					color: #a5b2b9 !important;
+					color: rgba(0, 39, 59, 0.35) !important;
+				}
+
+				div {
+					margin-top: 4px;
+					max-height: 40px;
+					overflow: hidden;
+					font-size: .9em;
+					color: #a5b2b9 !important;
+					color: rgba(0, 39, 59, 0.35) !important;
+				}
+			}
+
+			&:last-child > div {
+				border-bottom: none;
+			}
+
+			&:first-child > div {
+				border-bottom: 1px solid #e5e5e5;
+			}
+
+			&.selected {
+				background: #D7D7D7;
+			}
+
+			&.unseen {
+				h5 {
+					font-weight: bold;
+				}
+
+				div {
+					font-weight: bold;
+					color: #3f4549!important;
+				}
+
+				span {
+					color: #3f4549!important;
+				}
+			}
+		}
+	}
+}

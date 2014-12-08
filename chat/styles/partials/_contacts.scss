@@ -1,0 +1,168 @@
+.contacts {
+	position: absolute;
+	top: 44px;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+
+	> .nav {
+		background: #FFF;
+		border-bottom: 1px solid #e5e5e5;
+		max-width: 720px;
+		margin: 0 auto;
+
+		li > a {
+			height: 34px;
+			line-height: 30px;
+			background: none !important;
+			padding-top: 2px;
+			padding-bottom: 0;
+			border-radius: 0;
+			
+			&.active {
+				border-bottom: 4px solid #e5e5e5;
+			}
+		}
+	}
+
+	.selectedContacts {
+		text-align: center;
+		max-width: 720px;
+		margin: 0 auto;
+		overflow: auto;
+		max-height: 20%;
+
+		img {
+			width: 60px;
+			height: 60px;
+			border-radius: 60px;
+			margin: 10px 10px 10px 10px;
+		}
+	}
+
+	.searchBox {
+		background: #C7C7CC;
+		text-align: center;
+		max-width: 720px;
+		margin: 0 auto;
+
+		input {
+			width: 90%;
+			border-radius: 3px;
+			background: #fafafa;
+			border: none;
+			outline: none;
+			padding-left: 4px;
+			line-height: 24px;
+			margin: 5px 0 6px;
+
+			&::-webkit-input-placeholder {
+			   text-align:center;
+			}
+
+			&:-moz-placeholder { /* Firefox 18- */
+			   text-align:center;  
+			}
+
+			&::-moz-placeholder {  /* Firefox 19+ */
+			   text-align:center;  
+			}
+
+			&:-ms-input-placeholder {  
+			   text-align:center; 
+			}
+		}
+	}
+
+	> .list {
+		background: #FFF;
+		max-width: 720px;
+		margin: 0 auto;
+		padding: 4px 15px;
+
+		.group-label {
+			text-align: center;
+			margin: 4px 0;
+
+			span {
+				background-color: #8E8E93;
+				border-radius: 4px;
+				padding: 0 20px;
+				color: #FFF;
+				text-transform: uppercase;
+			}
+		}
+
+		ul {
+			margin-left: 20px;
+			padding: 0;
+			border-bottom: 1px solid #e5e5e5;
+
+			li {
+				padding: 10px 10px 10px 0;
+				list-style: none;
+				position: relative;
+				cursor: pointer;
+
+				> div {
+					height: 60px;
+					line-height: 60px;
+					margin-right: 10px;
+
+					.fa-check-circle {
+						color: #5AD427;
+					}
+
+					.fa-circle-o {
+						color: #8e9093;
+					}
+				}
+
+				img {
+					width: 60px;
+					height: 60px;
+					border-radius: 60px;
+					margin-right: 10px;
+				}
+
+				h4 {
+					margin: 0;
+					padding: 0;
+					line-height: 56px;
+				}
+			}
+		}
+	}
+
+	.loading {
+		position: relative;
+		width: 100%;
+
+		.spinner {
+			width: 40px;
+			height: 40px;
+
+			position: relative;
+			margin: 8px auto;
+
+			.double-bounce1, .double-bounce2 {
+				width: 100%;
+				height: 100%;
+				border-radius: 50%;
+				background-color: rgba(0,39,59,.35);
+				opacity: 0.6;
+				position: absolute;
+				top: 0;
+				left: 0;
+
+				-webkit-animation: bounce 2.0s infinite ease-in-out;
+				animation: bounce 2.0s infinite ease-in-out;
+			}
+
+			.double-bounce2 {
+				-webkit-animation-delay: -1.0s;
+				animation-delay: -1.0s;
+			}
+		}
+	}
+}

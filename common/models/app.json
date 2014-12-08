@@ -1,0 +1,45 @@
+{
+  "name": "app",
+  "base": "PersistedModel",
+  "options": {
+    "mysql": {
+      "table": "app"
+    },
+    "mongodb": {
+      "collection": "app"
+    },
+    "oracle": {
+      "schema": "DEMO",
+      "table": "PRODUCT"
+    }
+  },
+  "properties": {
+  },
+  "validations": [],
+  "relations": {
+    "user": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "userId"
+    },
+    "appPage": {
+      "type": "hasMany",
+      "model": "appPage",
+      "foreignKey": "appId"
+    },
+    "chatRoom": {
+      "type": "hasMany",
+      "model": "chatRoom",
+      "foreignKey": "appId"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "permission": "ALLOW",
+      "principalType": "ROLE",
+      "principalId": "$owner"
+    }
+  ],
+  "methods": []
+}

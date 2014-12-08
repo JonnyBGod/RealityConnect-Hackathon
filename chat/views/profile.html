@@ -1,0 +1,69 @@
+<div class="profile">
+  <div class="header clearfix" ng-controller="headerCtrl">
+    <div class="center" translate>Profile</div>
+    <h4 class="text-muted pull-left">
+      <a ng-if="!details" ng-click="goBack()">&nbsp;<i class="fa fa-angle-left fa-lg"></i>&nbsp;<i class="fa fa-comments-o fa-lg"></i></a>
+      &nbsp;&nbsp;
+    </h4>
+    <ul class="nav nav-pills pull-left">
+      <li class="appstore">
+          <a href="https://itunes.apple.com/us/app/wechat/id414478124?mt=8&uo=4" target="itunes_store">
+              <img src="https://linkmaker.itunes.apple.com/htmlResources/assets/en_us//images/web/linkmaker/badge_appstore-lrg.png">
+          </a>
+      </li>
+      <li class="appstore">
+          <a href="https://play.google.com/store/apps/details?id=dfghfdgh">
+              <img alt="Android app on Google Play" src="//developer.android.com/images/brand/en_app_rgb_wo_45.png" />
+          </a>
+      </li>
+    </ul>
+  </div>
+
+  <div ng-if="profile" class="container">
+    <div>
+      <img ng-src="{{profile.photo || 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDAiIGhlaWdodD0iMTQwIj48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI2VlZSIvPjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjcwIiB5PSI3MCIgc3R5bGU9ImZpbGw6I2FhYTtmb250LXdlaWdodDpib2xkO2ZvbnQtc2l6ZToxMnB4O2ZvbnQtZmFtaWx5OkFyaWFsLEhlbHZldGljYSxzYW5zLXNlcmlmO2RvbWluYW50LWJhc2VsaW5lOmNlbnRyYWwiPjE0MHgxNDA8L3RleHQ+PC9zdmc+'}}" alt="..." class="pull-left">
+      <h3>{{profile.name}}</h3>
+    </div>
+
+    <div ng-if="!currentUser.contacts || currentUser.contacts.indexOf(profile.id) === -1">
+      <button ng-click="addContact()" class="btn btn-info btn-block" translate>Invite</button>
+    </div>
+
+    <!--<div ng-if="currentUser.contacts && currentUser.contacts.indexOf(profile.id) !== -1">
+      <button ng-click="message()">Message</button>
+    </div>-->
+    <div ng-if="currentUser.contacts && currentUser.contacts.indexOf(profile.id) !== -1">
+      <div class="buttons">
+        <a ng-click="message()" ><i class="fa fa-comment-o fa-3x"></i></a>
+        <a href=""><i class="fa fa-phone fa-3x"></i></a>
+        <a href=""><i class="fa fa-video-camera fa-3x"></i></a>
+      </div>
+
+      <ul class="list clearfix">
+        <li ng-if="profile.phone" class="clearfix">
+          <div class="label" translate>Phone</div>
+          <h4>{{profile.phone}}</h4>
+        </li>
+        <li ng-if="profile.email" class="clearfix">
+          <div class="label" translate>Email</div>
+          <h4>{{profile.email}}</h4>
+        </li>
+      </ul>
+
+      <br />
+      <br />
+      <ul>
+          <li>
+            <div class="clearfix">
+              <a class="text-danger" translate>Block Contact</a>
+            </div>
+          </li>
+          <li>
+            <div class="clearfix">
+              <a class="red-text" translate>Remove Contact</a>
+            </div>
+          </li>
+      </ul>
+    </div>
+  </div>
+</div>

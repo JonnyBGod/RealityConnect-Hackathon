@@ -1,5 +1,5 @@
 {
-  "name": "PROJECT-NAME",
+  "name": "ori",
   "version": "0.0.0",
   "dependencies": {
     "angular": "latest",
@@ -11,6 +11,7 @@
     "angular-cookies": "latest",
     "angular-sanitize": "latest",
     "angular-animate": "latest",
+    "angular-route": "latest",
     "angular-touch": "latest",
     "angular-translate": "latest",
     "angular-translate-loader-static-files": "latest",
@@ -19,7 +20,10 @@
     "angulartics": "latest",
     "fontawesome": "latest",
     "socket.io-client": "latest",
-    "visibilityjs": "latest"
+    "visibilityjs": "latest",
+    "moment": "latest",
+    "font-mfizz": "latest",
+    "angular-modal-service": "latest"
   },
   "devDependencies": {
     "angular-mocks": "latest",

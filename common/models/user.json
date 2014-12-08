@@ -5,6 +5,18 @@
   "properties": {
     "photo": {
       "type": "string"
+    },
+    "contacts": {
+      "type": "array"
+    },
+    "invites": {
+      "type": "array"
+    },
+    "blocked": {
+      "type": "array"
+    },
+    "options": {
+      "type": "object"
     }
   },
   "relations": {
@@ -16,6 +28,16 @@
     "credentials": {
       "type": "hasMany",
       "model": "userCredential",
+      "foreignKey": "userId"
+    },
+    "events": {
+      "type": "hasMany",
+      "model": "event",
+      "foreignKey": "sender"
+    },
+    "apps": {
+      "type": "hasMany",
+      "model": "app",
       "foreignKey": "userId"
     }
   },

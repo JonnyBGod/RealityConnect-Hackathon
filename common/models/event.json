@@ -1,0 +1,51 @@
+{
+  "name": "event",
+  "base": "PersistedModel",
+  "options": {
+    "mysql": {
+      "table": "event"
+    },
+    "mongodb": {
+      "collection": "event"
+    },
+    "oracle": {
+      "schema": "DEMO",
+      "table": "PRODUCT"
+    }
+  },
+  "properties": {
+    "type": {
+      "type": "string"
+    },
+    "text": {
+      "type": "string"
+    },
+    "url": {
+      "type": "object"
+    },
+    "users": {
+      "type": "array"
+    },
+    "startSession": {
+      "type": "boolean"
+    },
+    "data": {
+      "type": "object"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "chatRoom": {
+      "type": "belongsTo",
+      "model": "chatRoom",
+      "foreignKey": "chatRoom"
+    },
+    "sender": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "sender"
+    }
+  },
+  "acls": [],
+  "methods": []
+}

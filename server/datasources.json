@@ -1,9 +1,12 @@
 {
   "db": {
-    "url": "mongodb://imoRoot:rv2sdec@ds057877.mongolab.com:57877/imoglobe",
     "name": "db",
-    "connector": "loopback-connector-mongodb",
-    "defaultForType": "db"
+    "connector": "mongodb",
+    "host": "ds057877.mongolab.com",
+    "port": 57877,
+    "database": "imoglobe",
+    "username": "imoRoot",
+    "password": "rv2sdec"
   },
   "mail": {
     "name": "mail",

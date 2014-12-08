@@ -1,5 +1,5 @@
 {
-  "name": "PROJECT-NAME",
+  "name": "ori",
   "version": "0.0.0",
   "main": "server/server.js",
   "dependencies": {
@@ -7,6 +7,7 @@
     "compression": "latest",
     "cookies": "latest",
     "errorhandler": "latest",
+    "fbgraph": "latest",
     "loopback": "latest",
     "loopback-boot": "latest",
     "loopback-component-passport": "latest",
@@ -14,6 +15,8 @@
     "loopback-connector-mongodb": "latest",
     "loopback-datasource-juggler": "latest",
     "newrelic": "latest",
+    "nodejs-gravatar": "^1.0.2",
+    "open-graph": "latest",
     "passport-facebook": "latest",
     "passport-google-oauth": "latest",
     "passport-twitter": "latest",

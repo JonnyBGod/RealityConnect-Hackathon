@@ -1,6 +1,6 @@
 exports.config = {
-  app_name : ['PROJECT-NAME'],
-  license_key : 'LICENSE-KEY',
+  app_name : ['ori'],
+  license_key : 'fc8201bbacbd2865d46d6a6cd53a5274b470b43d',
   logging : {
     level : 'info'
   },
